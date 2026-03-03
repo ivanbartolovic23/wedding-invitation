@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iva & Ivan - Vjenčanje 27.6.2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f0eb;
+            color: #2c2c2c;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* Page 1 - Main Invitation */
+        .page-1 {
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: clamp(32px, 8vw, 64px);
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .couple-illustration {
+            width: clamp(250px, 60vw, 400px);
+            height: auto;
+            margin: 40px 0;
+        }
+
+        .couple-names {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: bold;
+            margin: 30px 0 20px;
+            text-transform: uppercase;
+        }
+
+        .wedding-date {
+            font-size: clamp(18px, 4vw, 24px);
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .scroll-hint {
+            font-size: 14px;
+            color: #999;
+            margin-top: 40px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Page 2 - RSVP */
+        .page-2 {
+            background-color: #fff;
+        }
+
+        .party-illustration {
+            width: clamp(200px, 50vw, 300px);
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        .rsvp-title {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .rsvp-form {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #2c2c2c;
+            background-color: #f5f0eb;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .guest-list {
+            margin-bottom: 20px;
+        }
+
+        .guest-entry {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .guest-entry input {
+            flex: 1;
+        }
+
+        .remove-guest {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .add-guest {
+            background-color: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .add-guest:hover,
+        .remove-guest:hover {
+            opacity: 0.8;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #444;
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Page 3 - Details */
+        .page-3 {
+            background-color: #f5f0eb;
+        }
+
+        .car-illustration {
+            width: clamp(200px, 50vw, 300px);
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        .details-title {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .details-content {
+            max-width: 500px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .details-section {
+            margin-bottom: 30px;
+        }
+
+        .details-section h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .details-section p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .success-message {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #ff4444;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Main Invitation -->
+    <div class="page page-1">
+        <div class="main-title">
+            Two Less Fish<br>In The Sea
+        </div>
+        
+        <svg class="couple-illustration" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Groom -->
+            <rect x="80" y="200" width="80" height="120" fill="#2c2c2c"/>
+            <circle cx="120" cy="170" r="30" fill="#f5f0eb"/>
+            <rect x="80" y="320" width="35" height="80" fill="#2c2c2c"/>
+            <rect x="125" y="320" width="35" height="80" fill="#2c2c2c"/>
+            <circle cx="115" cy="395" r="15" fill="#2c2c2c"/>
+            <circle cx="145" cy="395" r="15" fill="#2c2c2c"/>
+            <!-- Bouquet -->
+            <line x1="140" y1="240" x2="180" y2="200" stroke="#2c2c2c" stroke-width="3"/>
+            <circle cx="180" cy="190" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="190" cy="195" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="175" cy="200" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            
+            <!-- Bride -->
+            <path d="M 220 200 L 220 320 L 180 380 L 300 380 L 260 320 L 260 200 Z" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="240" cy="170" r="30" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <path d="M 270 170 L 320 140 L 320 380" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <rect x="210" y="380" width="30" height="20" fill="#2c2c2c"/>
+            <rect x="250" y="380" width="30" height="20" fill="#2c2c2c"/>
+            
+            <!-- Text Arc -->
+            <path id="topArc" d="M 50 80 Q 200 20 350 80" fill="none"/>
+            <text font-size="32" font-weight="bold" fill="#2c2c2c">
+                <textPath href="#topArc" startOffset="50%" text-anchor="middle">
+                    TWO LESS FISH IN THE SEA
+                </textPath>
+            </text>
+        </svg>
+
+        <div class="couple-names">Iva i Ivan</div>
+        <div class="wedding-date">are getting married on 27.6.2026</div>
+        
+        <div class="scroll-hint">↓ Scroll down ↓</div>
+    </div>
+
+    <!-- Page 2: RSVP Form -->
+    <div class="page page-2">
+        <svg class="party-illustration" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left hand with glass -->
+            <rect x="20" y="120" width="60" height="15" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <ellipse cx="30" cy="127" rx="8" ry="10" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="45" cy="110" r="6" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <path d="M 45 104 L 45 70 Q 45 50 60 50 Q 75 50 75 70 L 75 104" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <line x1="45" y1="104" x2="75" y2="104" stroke="#2c2c2c" stroke-width="2"/>
+            <line x1="50" y1="80" x2="70" y2="80" stroke="#2c2c2c" stroke-width="1"/>
+            <line x1="48" y1="90" x2="72" y2="90" stroke="#2c2c2c" stroke-width="1"/>
+            
+            <!-- Right hand with glass -->
+            <rect x="220" y="120" width="60" height="15" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <ellipse cx="270" cy="127" rx="8" ry="10" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="255" cy="110" r="6" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <path d="M 255 104 L 255 70 Q 255 50 240 50 Q 225 50 225 70 L 225 104" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <line x1="225" y1="104" x2="255" y2="104" stroke="#2c2c2c" stroke-width="2"/>
+            <line x1="230" y1="80" x2="250" y2="80" stroke="#2c2c2c" stroke-width="1"/>
+            <line x1="228" y1="90" x2="252" y2="90" stroke="#2c2c2c" stroke-width="1"/>
+            
+            <!-- Text -->
+            <path id="partyArc" d="M 80 30 Q 150 10 220 30" fill="none"/>
+            <text font-size="28" font-weight="bold" fill="#2c2c2c">
+                <textPath href="#partyArc" startOffset="50%" text-anchor="middle">
+                    PARTY ON!
+                </textPath>
+            </text>
+        </svg>
+
+        <div class="rsvp-title">RSVP</div>
+
+        <div class="success-message" id="successMessage">
+            Hvala! Vaš odgovor je uspješno poslan. 🎉
+        </div>
+        <div class="error-message" id="errorMessage">
+            Došlo je do greške. Molimo pokušajte ponovo.
+        </div>
+
+        <form class="rsvp-form" id="rsvpForm">
+            <div class="form-group">
+                <label>Hoćete li doći?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="attending" value="yes" required>
+                        <span>Da, dolazim!</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="attending" value="no" required>
+                        <span>Ne mogu doći</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Imena gostiju</label>
+                <div class="guest-list" id="guestList">
+                    <div class="guest-entry">
+                        <input type="text" name="guest[]" placeholder="Ime i prezime" required>
+                    </div>
+                </div>
+                <button type="button" class="add-guest" onclick="addGuest()">+ Dodaj gosta</button>
+            </div>
+
+            <div class="form-group">
+                <label>Dodatne informacije (alergije, komentari)</label>
+                <textarea name="notes" placeholder="Vaše napomene..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Pošalji odgovor</button>
+        </form>
+    </div>
+
+    <!-- Page 3: Details -->
+    <div class="page page-3">
+        <svg class="car-illustration" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Car -->
+            <rect x="50" y="100" width="200" height="60" rx="10" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="3"/>
+            <rect x="70" y="80" width="80" height="30" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="3"/>
+            <circle cx="100" cy="160" r="20" fill="none" stroke="#2c2c2c" stroke-width="3"/>
+            <circle cx="200" cy="160" r="20" fill="none" stroke="#2c2c2c" stroke-width="3"/>
+            <circle cx="100" cy="160" r="10" fill="#2c2c2c"/>
+            <circle cx="200" cy="160" r="10" fill="#2c2c2c"/>
+            <rect x="160" y="100" width="80" height="30" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="3"/>
+            
+            <!-- Bride and Groom in car -->
+            <circle cx="110" cy="115" r="12" fill="#2c2c2c"/>
+            <circle cx="190" cy="115" r="12" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <path d="M 190 105 L 210 90 L 210 140" stroke="#2c2c2c" stroke-width="2" fill="none"/>
+            
+            <!-- Cans -->
+            <rect x="245" y="155" width="10" height="15" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <line x1="240" y1="165" x2="250" y2="155" stroke="#2c2c2c" stroke-width="1"/>
+        </svg>
+
+        <div class="details-title">DETAILS</div>
+
+        <div class="details-content">
+            <div class="details-section">
+                <h3>📅 Datum</h3>
+                <p>27.6.2026.</p>
+            </div>
+
+            <div class="details-section">
+                <h3>🕐 Okupljanje</h3>
+                <p>18:00 - Ranch Kurilovec</p>
+            </div>
+
+            <div class="details-section">
+                <h3>💍 Obred</h3>
+                <p>19:30</p>
+            </div>
+
+            <div class="details-section">
+                <h3>🍽️ Večera</h3>
+                <p>20:00</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ZAMIJENITE OVO SA VAŠIM GOOGLE APPS SCRIPT URL-om
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+        function addGuest() {
+            const guestList = document.getElementById('guestList');
+            const guestEntry = document.createElement('div');
+            guestEntry.className = 'guest-entry';
+            guestEntry.innerHTML = `
+                <input type="text" name="guest[]" placeholder="Ime i prezime" required>
+                <button type="button" class="remove-guest" onclick="removeGuest(this)">−</button>
+            `;
+            guestList.appendChild(guestEntry);
+        }
+
+        function removeGuest(button) {
+            button.parentElement.remove();
+        }
+
+        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Šaljem...';
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            const formData = new FormData(this);
+            const attending = formData.get('attending');
+            const guests = formData.getAll('guest[]').filter(g => g.trim() !== '');
+            const notes = formData.get('notes');
+
+            const data = {
+                attending: attending === 'yes' ? 'Da' : 'Ne',
+                guests: guests.join(', '),
+                guestCount: guests.length,
+                notes: notes,
+                timestamp: new Date().toLocaleString('hr-HR')
+            };
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                successMsg.style.display = 'block';
+                this.reset();
+                
+                // Scroll to success message
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Pošalji odgovor';
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
