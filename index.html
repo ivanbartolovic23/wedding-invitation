@@ -318,7 +318,12 @@
         </svg>
 
         <div class="couple-names">Iva i Ivan</div>
-        <div class="wedding-date">are getting married on 27.6.2026</div>
+        <div class="wedding-date">se vjenčaju 27.6.2026.,<br>pridružite nam se u slavlju naše ljubavi!</div>
+        <div class="wedding-date" style="margin-top: 30px; font-size: clamp(16px, 3.5vw, 20px);">
+            Ranch Kurilovec<br>
+            Zelena aleja 6<br>
+            10410 Velika Gorica
+        </div>
         
         <div class="scroll-hint">↓ Scroll down ↓</div>
     </div>
@@ -366,7 +371,7 @@
             <line x1="315" y1="210" x2="80" y2="195" stroke="#2c2c2c" stroke-width="1" stroke-dasharray="4,4"/>
         </svg>
 
-        <div class="details-title">DETAILS</div>
+        <div class="details-title">DETALJI</div>
 
         <div class="details-content">
             <div class="details-section">
@@ -375,17 +380,17 @@
             </div>
 
             <div class="details-section">
-                <h3>🕐 Okupljanje</h3>
-                <p>18:00 - Ranch Kurilovec</p>
+                <h3>🥂 Okupljanje & piće dobrodošlice</h3>
+                <p>18:00</p>
             </div>
 
             <div class="details-section">
-                <h3>💍 Obred</h3>
-                <p>19:30</p>
+                <h3>💍 Ceremonija</h3>
+                <p>19:00</p>
             </div>
 
             <div class="details-section">
-                <h3>🍽️ Večera</h3>
+                <h3>🍽️ Večera, ples i party mode ON!</h3>
                 <p>20:00</p>
             </div>
         </div>
@@ -443,7 +448,7 @@
             <circle cx="50" cy="160" r="3" fill="none" stroke="#2c2c2c" stroke-width="1"/>
         </svg>
 
-        <div class="rsvp-title">RSVP</div>
+        <div class="rsvp-title">PARTY ON?</div>
 
         <div class="success-message" id="successMessage">
             Hvala! Vaš odgovor je uspješno poslan. 🎉
@@ -454,7 +459,7 @@
 
         <form class="rsvp-form" id="rsvpForm">
             <div class="form-group">
-                <label>Hoćete li doći?</label>
+                <label>Ljubazno vas molimo da potvrdite svoj dolazak:</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="attending" value="yes" required>
@@ -462,9 +467,36 @@
                     </label>
                     <label class="radio-option">
                         <input type="radio" name="attending" value="no" required>
-                        <span>Ne mogu doći</span>
+                        <span>Nažalost, ne mogu doći.</span>
                     </label>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Odaberite meni:</label>
+                <div class="radio-group" style="flex-direction: column; gap: 12px;">
+                    <label class="radio-option">
+                        <input type="radio" name="menu" value="obicni" required>
+                        <span>1. Obični</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="menu" value="vegetarijanski" required>
+                        <span>2. Vegetarijanski</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="menu" value="veganski" required>
+                        <span>3. Veganski</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="menu" value="gluten-free" required>
+                        <span>4. Gluten free</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="menu" value="ostalo" required id="menuOstalo">
+                        <span>5. Ostalo (molim navesti alergije):</span>
+                    </label>
+                </div>
+                <input type="text" name="menuOther" id="menuOtherInput" placeholder="Navedite alergije ili posebne zahtjeve" style="margin-top: 10px; display: none;">
             </div>
 
             <div class="form-group">
@@ -475,11 +507,6 @@
                     </div>
                 </div>
                 <button type="button" class="add-guest" onclick="addGuest()">+ Dodaj gosta</button>
-            </div>
-
-            <div class="form-group">
-                <label>Dodatne informacije (alergije, komentari)</label>
-                <textarea name="notes" placeholder="Vaše napomene..."></textarea>
             </div>
 
             <button type="submit" class="submit-btn">Pošalji odgovor</button>
@@ -518,14 +545,17 @@
 
             const formData = new FormData(this);
             const attending = formData.get('attending');
+            const menu = formData.get('menu');
+            const menuOther = formData.get('menuOther');
             const guests = formData.getAll('guest[]').filter(g => g.trim() !== '');
-            const notes = formData.get('notes');
+
+            const menuText = menu === 'ostalo' ? `Ostalo: ${menuOther}` : menu;
 
             const data = {
                 attending: attending === 'yes' ? 'Da' : 'Ne',
+                menu: menuText,
                 guests: guests.join(', '),
                 guestCount: guests.length,
-                notes: notes,
                 timestamp: new Date().toLocaleString('hr-HR')
             };
 
@@ -550,6 +580,21 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Pošalji odgovor';
             }
+        });
+
+        // Show/hide menu other input
+        document.querySelectorAll('input[name="menu"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const otherInput = document.getElementById('menuOtherInput');
+                if (this.value === 'ostalo') {
+                    otherInput.style.display = 'block';
+                    otherInput.required = true;
+                } else {
+                    otherInput.style.display = 'none';
+                    otherInput.required = false;
+                    otherInput.value = '';
+                }
+            });
         });
     </script>
 </body>
