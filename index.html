@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iva & Ivan - Vjenčanje 27.6.2026</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,7 +14,7 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             background-color: #f5f0eb;
             color: #2c2c2c;
             overflow-x: hidden;
@@ -32,12 +34,12 @@
         }
 
         .main-title {
-            font-size: clamp(32px, 8vw, 64px);
-            font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 60px;
-            text-transform: uppercase;
-            letter-spacing: -2px;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(28px, 7vw, 56px);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
         }
 
         .couple-illustration {
@@ -47,10 +49,10 @@
         }
 
         .couple-names {
-            font-size: clamp(36px, 6vw, 48px);
-            font-weight: bold;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(32px, 6vw, 44px);
+            font-weight: 700;
             margin: 30px 0 20px;
-            text-transform: uppercase;
         }
 
         .wedding-date {
@@ -82,8 +84,9 @@
         }
 
         .details-title {
-            font-size: clamp(36px, 6vw, 48px);
-            font-weight: bold;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(32px, 6vw, 44px);
+            font-weight: 700;
             margin-bottom: 40px;
             text-transform: uppercase;
         }
@@ -119,8 +122,9 @@
         }
 
         .rsvp-title {
-            font-size: clamp(36px, 6vw, 48px);
-            font-weight: bold;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(32px, 6vw, 44px);
+            font-weight: 700;
             margin-bottom: 40px;
             text-transform: uppercase;
         }
@@ -267,54 +271,79 @@
 <body>
     <!-- Page 1: Main Invitation -->
     <div class="page page-1">
-        <div class="main-title">
-            Two Less Fish<br>In The Sea
-        </div>
-        
-        <svg class="couple-illustration" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-            <!-- Text Arc -->
-            <path id="topArc" d="M 50 80 Q 200 20 350 80" fill="none"/>
-            <text font-size="32" font-weight="bold" fill="#2c2c2c">
+        <svg class="couple-illustration" viewBox="0 0 400 550" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 20px;">
+            <!-- Curved text at top -->
+            <path id="topArc" d="M 40 100 A 160 160 0 0 1 360 100" fill="none"/>
+            <text font-family="Caveat, cursive" font-size="38" font-weight="700" fill="#2c2c2c">
                 <textPath href="#topArc" startOffset="50%" text-anchor="middle">
-                    TWO LESS FISH IN THE SEA
+                    TWO LESS FISH
                 </textPath>
             </text>
             
-            <!-- Groom body -->
-            <rect x="80" y="200" width="80" height="120" fill="#2c2c2c"/>
-            <circle cx="120" cy="170" r="30" fill="#f5f0eb"/>
-            <circle cx="115" cy="165" r="3" fill="#2c2c2c"/>
-            <circle cx="125" cy="165" r="3" fill="#2c2c2c"/>
-            <path d="M 110 180 Q 120 185 130 180" stroke="#2c2c2c" stroke-width="2" fill="none"/>
-            <rect x="80" y="320" width="35" height="80" fill="#2c2c2c"/>
-            <rect x="125" y="320" width="35" height="80" fill="#2c2c2c"/>
-            <ellipse cx="115" cy="400" rx="18" ry="10" fill="#2c2c2c"/>
-            <ellipse cx="145" cy="400" rx="18" ry="10" fill="#2c2c2c"/>
+            <!-- Curved text at bottom of arc -->
+            <path id="bottomArc" d="M 80 140 A 120 120 0 0 0 320 140" fill="none"/>
+            <text font-family="Caveat, cursive" font-size="38" font-weight="700" fill="#2c2c2c">
+                <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
+                    IN THE SEA
+                </textPath>
+            </text>
             
-            <!-- Bouquet -->
-            <line x1="140" y1="240" x2="175" y2="195" stroke="#2c2c2c" stroke-width="3"/>
-            <circle cx="170" cy="185" r="10" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-            <circle cx="185" cy="190" r="10" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-            <circle cx="175" cy="200" r="10" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-            <circle cx="165" cy="195" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-            <circle cx="180" cy="180" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <!-- Groom (left figure) -->
+            <!-- Head -->
+            <circle cx="140" cy="240" r="35" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <!-- Face details -->
+            <circle cx="132" cy="235" r="2" fill="#2c2c2c"/>
+            <circle cx="148" cy="235" r="2" fill="#2c2c2c"/>
+            <path d="M 130 250 Q 140 255 150 250" stroke="#2c2c2c" stroke-width="1.5" fill="none"/>
             
-            <!-- Bride dress -->
-            <path d="M 220 200 L 220 320 L 180 400 L 300 400 L 260 320 L 260 200 Z" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
-            <circle cx="240" cy="170" r="30" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
-            <circle cx="235" cy="165" r="3" fill="#2c2c2c"/>
-            <circle cx="245" cy="165" r="3" fill="#2c2c2c"/>
-            <path d="M 230 180 Q 240 185 250 180" stroke="#2c2c2c" stroke-width="2" fill="none"/>
+            <!-- Suit body -->
+            <rect x="105" y="275" width="70" height="110" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="2"/>
+            <!-- Shirt -->
+            <rect x="130" y="280" width="20" height="40" fill="#f5f0eb"/>
+            <line x1="140" y1="280" x2="140" y2="320" stroke="#2c2c2c" stroke-width="1"/>
+            
+            <!-- Shorts (visible below suit jacket) -->
+            <rect x="105" y="385" width="32" height="60" fill="#2c2c2c"/>
+            <rect x="143" y="385" width="32" height="60" fill="#2c2c2c"/>
+            
+            <!-- Shoes -->
+            <ellipse cx="121" cy="450" rx="20" ry="8" fill="#2c2c2c"/>
+            <ellipse cx="159" cy="450" rx="20" ry="8" fill="#2c2c2c"/>
+            
+            <!-- Bouquet in groom's hand -->
+            <line x1="165" y1="310" x2="195" y2="270" stroke="#2c2c2c" stroke-width="2"/>
+            <!-- Flowers -->
+            <circle cx="195" cy="260" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="205" cy="265" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="190" cy="270" r="7" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            <circle cx="200" cy="255" r="6" fill="none" stroke="#2c2c2c" stroke-width="2"/>
+            
+            <!-- Bride (right figure) -->
+            <!-- Head -->
+            <circle cx="260" cy="240" r="35" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <!-- Face details -->
+            <circle cx="252" cy="235" r="2" fill="#2c2c2c"/>
+            <circle cx="268" cy="235" r="2" fill="#2c2c2c"/>
+            <path d="M 250 250 Q 260 255 270 250" stroke="#2c2c2c" stroke-width="1.5" fill="none"/>
+            
+            <!-- Wedding dress -->
+            <path d="M 230 275 L 230 370 L 200 450 L 320 450 L 290 370 L 290 275 Z" 
+                  fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2"/>
+            <!-- Dress details -->
+            <line x1="235" y1="320" x2="285" y2="320" stroke="#2c2c2c" stroke-width="1" opacity="0.3"/>
+            <line x1="230" y1="360" x2="290" y2="360" stroke="#2c2c2c" stroke-width="1" opacity="0.3"/>
+            <line x1="215" y1="400" x2="305" y2="400" stroke="#2c2c2c" stroke-width="1" opacity="0.3"/>
             
             <!-- Veil -->
-            <path d="M 270 170 L 320 140 L 320 400" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-            <path d="M 268 180 L 315 155" stroke="#2c2c2c" stroke-width="1" fill="none"/>
-            <path d="M 266 190 L 313 170" stroke="#2c2c2c" stroke-width="1" fill="none"/>
-            <path d="M 264 200 L 311 185" stroke="#2c2c2c" stroke-width="1" fill="none"/>
+            <path d="M 285 230 Q 310 210 325 200 L 325 450" 
+                  stroke="#2c2c2c" stroke-width="2" fill="none"/>
+            <path d="M 283 240 Q 305 225 318 218" stroke="#2c2c2c" stroke-width="1" fill="none" opacity="0.5"/>
+            <path d="M 281 255 Q 300 245 313 240" stroke="#2c2c2c" stroke-width="1" fill="none" opacity="0.5"/>
+            <path d="M 280 270 Q 295 265 308 262" stroke="#2c2c2c" stroke-width="1" fill="none" opacity="0.5"/>
             
             <!-- Bride shoes -->
-            <ellipse cx="210" cy="400" rx="18" ry="8" fill="#2c2c2c"/>
-            <ellipse cx="270" cy="400" rx="18" ry="8" fill="#2c2c2c"/>
+            <ellipse cx="235" cy="450" rx="18" ry="7" fill="#2c2c2c"/>
+            <ellipse cx="285" cy="450" rx="18" ry="7" fill="#2c2c2c"/>
         </svg>
 
         <div class="couple-names">Iva i Ivan</div>
