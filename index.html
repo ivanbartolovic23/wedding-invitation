@@ -306,7 +306,7 @@
     <div class="container" id="mainContainer">
         <!-- Page 1: Main Invitation -->
         <div class="page page-1" id="page1" onclick="slideToNextPage()">
-            <img src="pozivnica_front.jpeg" alt="Iva i Ivan - Vjenčanje 27.6.2026">
+            <img id="mainImage" src="pozivnica_front.jpeg" alt="Iva i Ivan - Vjenčanje 27.6.2026">
         </div>
 
         <!-- Page 2: Details -->
@@ -496,7 +496,11 @@
 
     </div>
 
+    <script src="image-data.js"></script>
     <script>
+        if (typeof imageData !== 'undefined') {
+            document.getElementById('mainImage').src = imageData;
+        }
         function slideToNextPage() {
             const container = document.getElementById('mainContainer');
             container.classList.add('slide-up');
