@@ -18,6 +18,16 @@
             background-color: #f5f0eb;
             color: #2c2c2c;
             overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .container {
+            position: relative;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .container.slide-up {
+            transform: translateY(-100vh);
         }
 
         .page {
@@ -31,6 +41,22 @@
 
         .page-1 {
             text-align: center;
+            background-image: url('pozivnica_front.jpeg');
+            background-size: contain;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-color: #f5f0eb;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 80px;
+        }
+
+        .page-1 > * {
+            position: relative;
+            z-index: 1;
         }
 
         .main-title {
@@ -50,22 +76,39 @@
 
         .couple-names {
             font-family: 'Caveat', cursive;
-            font-size: clamp(32px, 6vw, 44px);
+            font-size: clamp(48px, 10vw, 80px);
             font-weight: 700;
             margin: 30px 0 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8), 
+                         -1px -1px 2px rgba(255, 255, 255, 0.6);
         }
 
         .wedding-date {
             font-size: clamp(18px, 4vw, 24px);
-            color: #666;
-            margin-bottom: 60px;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8), 
+                         -1px -1px 2px rgba(255, 255, 255, 0.6);
+        }
+
+        .wedding-date strong {
+            font-size: clamp(28px, 6vw, 40px);
+            font-weight: 700;
+            display: block;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9), 
+                         -1px -1px 2px rgba(255, 255, 255, 0.7);
         }
 
         .scroll-hint {
-            font-size: 14px;
-            color: #999;
+            font-size: 16px;
+            color: #666;
             margin-top: 40px;
             animation: bounce 2s infinite;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
         }
 
         @keyframes bounce {
@@ -269,101 +312,21 @@
     </style>
 </head>
 <body>
-    <!-- Page 1: Main Invitation -->
-    <div class="page page-1">
-        <svg class="couple-illustration" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
-            <!-- Curved text at top -->
-            <path id="topCurve" d="M 50 120 Q 250 40 450 120" fill="none"/>
-            <text font-family="Caveat, cursive" font-size="48" font-weight="700" fill="#2c2c2c" letter-spacing="2">
-                <textPath href="#topCurve" startOffset="50%" text-anchor="middle">
-                    TWO LESS FISH
-                </textPath>
-            </text>
+    <div class="container" id="mainContainer">
+        <!-- Page 1: Main Invitation -->
+        <div class="page page-1" id="page1" onclick="slideToNextPage()">
+            <div class="couple-names">Iva i Ivan</div>
+            <div class="wedding-date">
+                se vjenčaju<br>
+                <strong>27.6.2026.</strong><br>
+                na Ranchu Kurilovec
+            </div>
             
-            <path id="bottomCurve" d="M 100 160 Q 250 100 400 160" fill="none"/>
-            <text font-family="Caveat, cursive" font-size="48" font-weight="700" fill="#2c2c2c" letter-spacing="2">
-                <textPath href="#bottomCurve" startOffset="50%" text-anchor="middle">
-                    IN THE SEA
-                </textPath>
-            </text>
-            
-            <!-- GROOM (Left figure) -->
-            <!-- Head -->
-            <circle cx="170" cy="280" r="40" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2.5"/>
-            <!-- Simple smile -->
-            <circle cx="160" cy="275" r="3" fill="#2c2c2c"/>
-            <circle cx="180" cy="275" r="3" fill="#2c2c2c"/>
-            <path d="M 155 290 Q 170 298 185 290" stroke="#2c2c2c" stroke-width="2" fill="none"/>
-            
-            <!-- Black suit body (rectangle) -->
-            <rect x="130" y="320" width="80" height="130" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="2"/>
-            
-            <!-- White shirt/tie area -->
-            <rect x="155" y="325" width="30" height="60" fill="#f5f0eb"/>
-            <line x1="170" y1="325" x2="170" y2="385" stroke="#2c2c2c" stroke-width="2"/>
-            
-            <!-- Black shorts/legs -->
-            <rect x="130" y="450" width="35" height="80" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="2"/>
-            <rect x="175" y="450" width="35" height="80" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="2"/>
-            
-            <!-- Shoes -->
-            <ellipse cx="147" cy="535" rx="22" ry="10" fill="#2c2c2c"/>
-            <ellipse cx="192" cy="535" rx="22" ry="10" fill="#2c2c2c"/>
-            
-            <!-- Bouquet between them -->
-            <g transform="translate(220, 310)">
-                <line x1="0" y1="0" x2="15" y2="-25" stroke="#2c2c2c" stroke-width="2.5"/>
-                <line x1="0" y1="0" x2="20" y2="-20" stroke="#2c2c2c" stroke-width="2.5"/>
-                <line x1="0" y1="0" x2="10" y2="-28" stroke="#2c2c2c" stroke-width="2.5"/>
-                <!-- Flower circles -->
-                <circle cx="15" cy="-25" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-                <circle cx="20" cy="-20" r="8" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-                <circle cx="10" cy="-28" r="7" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-                <circle cx="25" cy="-15" r="6" fill="none" stroke="#2c2c2c" stroke-width="2"/>
-            </g>
-            
-            <!-- BRIDE (Right figure) -->
-            <!-- Head -->
-            <circle cx="330" cy="280" r="40" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2.5"/>
-            <!-- Simple smile -->
-            <circle cx="320" cy="275" r="3" fill="#2c2c2c"/>
-            <circle cx="340" cy="275" r="3" fill="#2c2c2c"/>
-            <path d="M 315 290 Q 330 298 345 290" stroke="#2c2c2c" stroke-width="2" fill="none"/>
-            
-            <!-- Wedding dress (trapezoid shape) -->
-            <path d="M 300 320 L 300 430 L 260 535 L 400 535 L 360 430 L 360 320 Z" 
-                  fill="#f5f0eb" stroke="#2c2c2c" stroke-width="2.5"/>
-            
-            <!-- Dress horizontal lines for detail -->
-            <line x1="305" y1="370" x2="355" y2="370" stroke="#2c2c2c" stroke-width="1.5" opacity="0.4"/>
-            <line x1="300" y1="420" x2="360" y2="420" stroke="#2c2c2c" stroke-width="1.5" opacity="0.4"/>
-            <line x1="280" y1="480" x2="380" y2="480" stroke="#2c2c2c" stroke-width="1.5" opacity="0.4"/>
-            
-            <!-- Veil flowing down -->
-            <path d="M 360 270 Q 390 250 410 240 L 410 535" 
-                  stroke="#2c2c2c" stroke-width="2.5" fill="none"/>
-            <path d="M 358 285 Q 385 270 405 262" stroke="#2c2c2c" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <path d="M 356 305 Q 380 295 403 290" stroke="#2c2c2c" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <path d="M 354 325" stroke="#2c2c2c" stroke-width="1.2" fill="none" opacity="0.5"/>
-            
-            <!-- Bride shoes -->
-            <ellipse cx="290" cy="535" rx="20" ry="9" fill="#2c2c2c"/>
-            <ellipse cx="370" cy="535" rx="20" ry="9" fill="#2c2c2c"/>
-        </svg>
-
-        <div class="couple-names">Iva i Ivan</div>
-        <div class="wedding-date">se vjenčaju 27.6.2026.,<br>pridružite nam se u slavlju naše ljubavi!</div>
-        <div class="wedding-date" style="margin-top: 30px; font-size: clamp(16px, 3.5vw, 20px);">
-            Ranch Kurilovec<br>
-            Zelena aleja 6<br>
-            10410 Velika Gorica
+            <div class="scroll-hint">klikni za nastavak</div>
         </div>
-        
-        <div class="scroll-hint">↓ Scroll down ↓</div>
-    </div>
 
-    <!-- Page 2: Details -->
-    <div class="page page-2">
+        <!-- Page 2: Details -->
+        <div class="page page-2">
         <svg class="car-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
             <!-- Car body -->
             <rect x="80" y="150" width="240" height="70" rx="8" fill="#f5f0eb" stroke="#2c2c2c" stroke-width="3"/>
@@ -430,8 +393,8 @@
         </div>
     </div>
 
-    <!-- Page 3: RSVP Form -->
-    <div class="page page-3">
+        <!-- Page 3: RSVP Form -->
+        <div class="page page-3">
         <svg class="party-illustration" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
             <!-- Text Arc -->
             <path id="partyArc" d="M 100 30 Q 200 10 300 30" fill="none"/>
@@ -547,7 +510,14 @@
         </form>
     </div>
 
+    </div>
+
     <script>
+        function slideToNextPage() {
+            const container = document.getElementById('mainContainer');
+            container.classList.add('slide-up');
+        }
+
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIkLFVZIqH8iUTGwpfG_eMsF6aCCdDldsUUv_ah9L0BeQ5ds2JLA2RJCOEo0zEx3zE/exec';
 
         function addGuest() {
