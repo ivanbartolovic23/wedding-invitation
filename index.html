@@ -19,6 +19,7 @@
             color: #2c2c2c;
             overflow-x: hidden;
             overflow-y: auto;
+            touch-action: pan-y;
         }
 
         .container {
@@ -47,6 +48,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            touch-action: none;
         }
 
         .page-1 img {
@@ -138,6 +140,7 @@
         .page-4 {
             background-color: #f5f0eb;
             padding: 0;
+            display: none;
         }
 
         .page-4 img {
@@ -169,7 +172,7 @@
 
         label {
             display: block;
-            font-size: 9px;
+            font-size: clamp(11px, 2vw, 9px);
             margin-bottom: 3px;
             font-weight: 500;
         }
@@ -181,7 +184,7 @@
             padding: 4px;
             border: 2px solid #2c2c2c;
             background-color: #f5f0eb;
-            font-size: 9px;
+            font-size: clamp(11px, 2vw, 9px);
             font-family: 'Akaya Kanadaka', cursive;
             box-sizing: border-box;
         }
@@ -212,7 +215,7 @@
             border: none;
             padding: 4px 8px;
             cursor: pointer;
-            font-size: 10px;
+            font-size: clamp(12px, 2.2vw, 10px);
             font-weight: bold;
         }
 
@@ -222,7 +225,7 @@
             border: none;
             padding: 4px 10px;
             cursor: pointer;
-            font-size: 9px;
+            font-size: clamp(11px, 2vw, 9px);
             font-weight: bold;
             margin-bottom: 6px;
         }
@@ -244,12 +247,12 @@
             align-items: center;
             gap: 3px;
             cursor: pointer;
-            font-size: 9px;
+            font-size: clamp(11px, 2vw, 9px);
         }
 
         .radio-option input[type="radio"] {
-            width: 12px;
-            height: 12px;
+            width: clamp(14px, 2.5vw, 12px);
+            height: clamp(14px, 2.5vw, 12px);
             cursor: pointer;
         }
 
@@ -258,7 +261,7 @@
             color: white;
             border: none;
             padding: 6px 16px;
-            font-size: 10px;
+            font-size: clamp(12px, 2.2vw, 10px);
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
@@ -283,7 +286,7 @@
             margin-bottom: 6px;
             border-radius: 4px;
             display: none;
-            font-size: 9px;
+            font-size: clamp(11px, 2vw, 9px);
         }
 
         .error-message {
@@ -293,7 +296,7 @@
             margin-bottom: 6px;
             border-radius: 4px;
             display: none;
-            font-size: 9px;
+            font-size: clamp(11px, 2vw, 9px);
         }
 
         @media (max-width: 768px) {
@@ -307,17 +310,17 @@
     <div class="container" id="mainContainer">
         <!-- Page 1: Main Invitation -->
         <div class="page page-1" id="page1" onclick="slideToNextPage()">
-            <img src="naslovna.png" alt="Iva i Ivan - Vjenčanje 27.6.2026">
+            <img src="C:\Users\zabrvai\Desktop\pozivnica\naslovna.png" alt="Iva i Ivan - Vjenčanje 27.6.2026">
         </div>
 
         <!-- Page 2: Details -->
         <div class="page page-2">
-            <img src="detalji.png" alt="Detalji">
+            <img src="C:\Users\zabrvai\Desktop\pozivnica\detalji.png" alt="Detalji">
         </div>
 
         <!-- Page 3: RSVP Form -->
         <div class="page page-3">
-            <img src="party_on.png" alt="RSVP">
+            <img src="C:\Users\zabrvai\Desktop\pozivnica\party_on.png" alt="RSVP">
 
         <div class="success-message" id="successMessage">
             Hvala! Vaš odgovor je uspješno poslan. 🎉
@@ -384,7 +387,7 @@
 
         <!-- Page 4: Final Page -->
         <div class="page page-4">
-            <img src="zadnja.png" alt="Final">
+            <img src="C:\Users\zabrvai\Desktop\pozivnica\zadnja.png" alt="Final">
         </div>
 
     </div>
@@ -452,7 +455,13 @@
 
                 successMsg.style.display = 'block';
                 this.reset();
-                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Show final page after successful submission
+                setTimeout(() => {
+                    document.querySelector('.page-4').style.display = 'flex';
+                    const container = document.getElementById('mainContainer');
+                    container.style.transform = 'translateY(-300vh)';
+                }, 2000);scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
             } catch (error) {
                 console.error('Error:', error);
