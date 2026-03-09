@@ -57,7 +57,8 @@
             background-color: #f5f0eb;
             padding: 0;
             opacity: 1;
-            transition: opacity 0.8s ease-out;
+            transition: opacity 1.5s ease-out;
+            -webkit-transition: opacity 1.5s ease-out;
         }
 
         .page-1.hidden {
@@ -449,7 +450,13 @@
             setTimeout(() => {
                 document.querySelector('.page-2').scrollIntoView({ behavior: 'smooth' });
                 setTimeout(() => page1.classList.add('removed'), 500);
-            }, 800);
+            }, 1500);
+        });
+
+        // Touch support for mobile
+        page1.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            page1.click();
         });
 
         // Scroll to page 3
