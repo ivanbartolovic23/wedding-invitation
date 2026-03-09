@@ -29,7 +29,6 @@
 
         .page {
             min-height: 100vh;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -40,12 +39,11 @@
         }
 
         .page img {
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
+            max-width: 100%;
+            max-height: 100vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
 
         /* Page 1 - Fixed Overlay */
@@ -74,33 +72,23 @@
         .scroll-arrow {
             position: absolute;
             bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            border: 3px solid #2c2c2c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: bounce-arrow 2s infinite;
+            right: 30px;
+            width: 60px;
+            height: 60px;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.8);
             z-index: 10;
+            animation: pulse-arrow 2s infinite;
         }
 
-        .scroll-arrow::after {
-            content: '';
-            width: 12px;
-            height: 12px;
-            border-bottom: 3px solid #2c2c2c;
-            border-right: 3px solid #2c2c2c;
-            transform: rotate(45deg) translateY(-3px);
+        .scroll-arrow svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
-        @keyframes bounce-arrow {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
+        @keyframes pulse-arrow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
         }
 
         /* Page 3 - RSVP Attendance */
@@ -122,11 +110,14 @@
 
         .page-4-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             z-index: 0;
         }
 
@@ -335,8 +326,9 @@
         @media (max-width: 768px) {
             .scroll-arrow {
                 bottom: 20px;
-                width: 35px;
-                height: 35px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
@@ -351,7 +343,13 @@
     <!-- Page 2: Details -->
     <div class="page page-2">
         <img src="detalji_2.png" alt="Detalji">
-        <div class="scroll-arrow" onclick="scrollToPage3()"></div>
+        <div class="scroll-arrow" onclick="scrollToPage3()">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="30" r="28" fill="#2c2c2c" opacity="0.9"/>
+                <path d="M 20 25 L 30 35 L 40 25" stroke="#f5f0eb" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 30 15 L 30 35" stroke="#f5f0eb" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
     </div>
 
     <!-- Page 3: RSVP Attendance -->
@@ -395,7 +393,7 @@
 
     <!-- Page 5: Final Page -->
     <div class="page page-5">
-        <img src="zadnja.png" alt="Final">
+        <img src="party_on_4.png" alt="Final">
     </div>
 </div>
 
@@ -504,8 +502,8 @@
                     <label>Odaberite meni za gosta ${id}:</label>
                     <div class="radio-group radio-group-vertical">
                         <label class="radio-option">
-                            <input type="radio" name="menu-${id}" value="obicni" required>
-                            <span>1. Obični</span>
+                            <input type="radio" name="menu-${id}" value="bez_preferencija" required>
+                            <span>1. Bez preferencija</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="menu-${id}" value="vegetarijanski" required>
