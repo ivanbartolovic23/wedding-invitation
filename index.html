@@ -76,6 +76,7 @@
             background-color: #fff;
             position: relative;
             justify-content: flex-start;
+            padding: 20px;
         }
 
         .page-5 {
@@ -108,18 +109,15 @@
         }
 
         .guest-form {
-            position: absolute;
-            bottom: 5vh;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 500px;
+            width: 90%;
+            max-width: 600px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
             font-family: 'Akaya Kanadaka', cursive;
             max-height: 80vh;
             overflow-y: auto;
+            margin: 20px auto;
         }
 
         .form-group {
@@ -341,8 +339,7 @@
         } else {
             // Show guest details page
             document.querySelector('.page-4').style.display = 'flex';
-            const container = document.getElementById('mainContainer');
-            container.style.transform = 'translateY(-300vh)';
+            document.querySelector('.page-4').scrollIntoView({ behavior: 'smooth' });
             addGuest(); // Add first guest
         }
     });
