@@ -21,14 +21,10 @@
         }
 
         .container {
-            position: relative;
-            transition: transform 0.8s ease-in-out;
-            overflow-y: auto;
             height: 100vh;
-        }
-
-        .container.slide-up {
-            transform: translateY(-100vh);
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
         }
 
         .page {
@@ -37,29 +33,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            scroll-snap-align: start;
+            position: relative;
         }
 
-        .page-1 {
-            padding: 0;
-            cursor: pointer;
-            background-color: #f5f0eb;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .page-1.hidden {
-            display: none;
-        }
-
-        .page-1 img, .page-2 img, .page-3 img, .page-4 img, .page-5 img {
+        .page img {
             max-width: 100%;
             max-height: 100vh;
             width: auto;
@@ -67,21 +45,59 @@
             object-fit: contain;
         }
 
-        .page-2, .page-3, .page-4, .page-5 {
+        /* Page 1 - Fixed Overlay */
+        .page-1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            cursor: pointer;
             background-color: #f5f0eb;
             padding: 0;
         }
 
+        .page-1.hidden {
+            display: none;
+        }
+
+        /* Page 2 - Details */
+        .page-2 {
+            background-color: #f5f0eb;
+            padding: 0;
+        }
+
+        /* Page 3 - RSVP Attendance */
+        .page-3 {
+            background-color: #fff;
+            position: relative;
+            padding: 0;
+        }
+
+        /* Page 4 - Guest Details */
         .page-4 {
             background-color: #fff;
             position: relative;
-            justify-content: flex-start;
-            padding: 20px;
+            padding: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
         }
 
+        .page-4-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 0;
+        }
+
+        /* Page 5 - Final */
         .page-5 {
             display: none;
-            overflow: hidden;
         }
 
         .page-5.active {
@@ -91,9 +107,10 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 9999;
+            z-index: 10001;
         }
 
+        /* Forms */
         .rsvp-form {
             position: absolute;
             bottom: -2vh;
@@ -103,8 +120,6 @@
             max-width: 300px;
             padding: 8px;
             background: transparent;
-            border-radius: 8px;
-            margin-bottom: 5px;
             font-family: 'Akaya Kanadaka', cursive;
         }
 
@@ -112,17 +127,24 @@
             width: 90%;
             max-width: 600px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.95);
+            background: transparent;
             border-radius: 8px;
             font-family: 'Akaya Kanadaka', cursive;
             max-height: 80vh;
             overflow-y: auto;
             margin: 20px auto;
+            position: relative;
+            z-index: 1;
         }
 
         .form-group {
             margin-bottom: 12px;
             text-align: left;
+        }
+
+        .form-group-vertical {
+            flex-direction: column;
+            gap: 8px;
         }
 
         label {
@@ -134,13 +156,11 @@
 
         input[type="text"], textarea {
             width: 100%;
-            max-width: 100%;
             padding: 8px;
             border: 2px solid #2c2c2c;
             background-color: #f5f0eb;
             font-size: 16px;
             font-family: 'Akaya Kanadaka', cursive;
-            box-sizing: border-box;
         }
 
         .guest-list {
@@ -166,36 +186,16 @@
             flex: 1;
         }
 
-        .remove-guest {
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .add-guest {
-            background-color: #2c2c2c;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .add-guest:hover, .remove-guest:hover {
-            opacity: 0.8;
-        }
-
         .radio-group {
             display: flex;
             gap: 10px;
             margin-top: 5px;
             line-height: 1.2;
+        }
+
+        .radio-group-vertical {
+            flex-direction: column;
+            gap: 5px;
         }
 
         .radio-option {
@@ -212,47 +212,80 @@
             cursor: pointer;
         }
 
-        .submit-btn {
+        /* Buttons */
+        .btn {
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Akaya Kanadaka', cursive;
+        }
+
+        .btn-primary {
             background-color: #2c2c2c;
             color: white;
-            border: none;
             padding: 12px 24px;
             font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
             text-transform: uppercase;
             margin-top: 10px;
             width: 100%;
-            max-width: 100%;
         }
 
-        .submit-btn:hover {
+        .btn-primary:hover {
             background-color: #444;
         }
 
-        .submit-btn:disabled {
+        .btn-primary:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
 
-        .success-message {
-            background-color: #4CAF50;
+        .btn-add {
+            background-color: #2c2c2c;
             color: white;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            display: none;
             font-size: 15px;
+            margin-bottom: 10px;
         }
 
-        .error-message {
+        .btn-add:hover {
+            opacity: 0.8;
+        }
+
+        .btn-remove {
             background-color: #ff4444;
             color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+        }
+
+        .btn-remove:hover {
+            opacity: 0.8;
+        }
+
+        /* Messages */
+        .message {
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 4px;
             display: none;
             font-size: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message-success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .message-error {
+            background-color: #ff4444;
+            color: white;
+        }
+
+        .hidden-input {
+            margin-top: 8px;
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -265,7 +298,7 @@
 <body>
 <div class="container" id="mainContainer">
     <!-- Page 1: Main Invitation -->
-    <div class="page page-1" id="page1" onclick="slideToNextPage()">
+    <div class="page page-1" id="page1">
         <img src="naslovna.png" alt="Iva i Ivan - Vjenčanje 27.6.2026">
     </div>
 
@@ -281,7 +314,7 @@
         <form class="rsvp-form" id="attendanceForm">
             <div class="form-group">
                 <label>Ljubazno vas molimo da potvrdite svoj dolazak:</label>
-                <div class="radio-group" style="flex-direction: column; gap: 8px;">
+                <div class="radio-group form-group-vertical">
                     <label class="radio-option">
                         <input type="radio" name="attending" value="yes" required>
                         <span>Da, dolazim!</span>
@@ -292,23 +325,24 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="submit-btn">Nastavi</button>
+            <button type="submit" class="btn btn-primary">Nastavi</button>
         </form>
     </div>
 
     <!-- Page 4: Guest Details -->
-    <div class="page page-4" style="display: none;">
-        <div class="success-message" id="successMessage">
+    <div class="page page-4">
+        <img src="party_on.png" alt="Guest Details" class="page-4-bg">
+        <div class="message message-success" id="successMessage">
             Hvala! Vaš odgovor je uspješno poslan. 🎉
         </div>
-        <div class="error-message" id="errorMessage">
+        <div class="message message-error" id="errorMessage">
             Došlo je do greške. Molimo pokušajte ponovo.
         </div>
 
         <form class="guest-form" id="guestForm">
-            <div id="guestList"></div>
-            <button type="button" class="add-guest" onclick="addGuest()">+ Dodaj gosta</button>
-            <button type="submit" class="submit-btn">Pošalji odgovor</button>
+            <div id="guestList" class="guest-list"></div>
+            <button type="button" class="btn btn-add" id="addGuestBtn">+ Dodaj gosta</button>
+            <button type="submit" class="btn btn-primary">Pošalji odgovor</button>
         </form>
     </div>
 
@@ -319,157 +353,178 @@
 </div>
 
 <script>
-    let guestCount = 0;
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIkLFVZIqH8iUTGwpfG_eMsF6aCCdDldsUUv_ah9L0BeQ5ds2JLA2RJCOEo0zEx3zE/exec';
+    (function() {
+        'use strict';
 
-    function slideToNextPage() {
+        let guestCount = 0;
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIkLFVZIqH8iUTGwpfG_eMsF6aCCdDldsUUv_ah9L0BeQ5ds2JLA2RJCOEo0zEx3zE/exec';
+
+        // Elements
         const page1 = document.getElementById('page1');
-        page1.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-
-    // Handle attendance form
-    document.getElementById('attendanceForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const attending = document.querySelector('input[name="attending"]:checked').value;
-
-        if (attending === 'no') {
-            // Show final page
-            showFinalPage();
-        } else {
-            // Show guest details page
-            document.querySelector('.page-4').style.display = 'flex';
-            document.querySelector('.page-4').scrollIntoView({ behavior: 'smooth' });
-            addGuest(); // Add first guest
-        }
-    });
-
-    function addGuest() {
-        guestCount++;
+        const page4 = document.querySelector('.page-4');
+        const page5 = document.querySelector('.page-5');
+        const attendanceForm = document.getElementById('attendanceForm');
+        const guestForm = document.getElementById('guestForm');
+        const addGuestBtn = document.getElementById('addGuestBtn');
         const guestList = document.getElementById('guestList');
-        const guestItem = document.createElement('div');
-        guestItem.className = 'guest-item';
-        guestItem.id = `guest-${guestCount}`;
-        guestItem.innerHTML = `
-            <div class="form-group">
-                <label>Ime i prezime gosta ${guestCount}:</label>
-                <div class="guest-entry">
-                    <input type="text" name="guest-name-${guestCount}" placeholder="Ime i prezime" required>
-                    ${guestCount > 1 ? `<button type="button" class="remove-guest" onclick="removeGuest(${guestCount})">−</button>` : ''}
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Odaberite meni za gosta ${guestCount}:</label>
-                <div class="radio-group" style="flex-direction: column; gap: 5px;">
-                    <label class="radio-option">
-                        <input type="radio" name="menu-${guestCount}" value="obicni" required>
-                        <span>1. Obični</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="menu-${guestCount}" value="vegetarijanski" required>
-                        <span>2. Vegetarijanski</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="menu-${guestCount}" value="veganski" required>
-                        <span>3. Veganski</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="menu-${guestCount}" value="gluten-free" required>
-                        <span>4. Gluten free</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="menu-${guestCount}" value="ostalo" required>
-                        <span>5. Ostalo (molim navesti alergije):</span>
-                    </label>
-                </div>
-                <input type="text" name="menu-other-${guestCount}" placeholder="Navedite alergije ili posebne zahtjeve" style="margin-top: 8px; display: none;">
-            </div>
-        `;
-        guestList.appendChild(guestItem);
-
-        // Add event listener for "ostalo" option
-        const radioButtons = guestItem.querySelectorAll(`input[name="menu-${guestCount}"]`);
-        const otherInput = guestItem.querySelector(`input[name="menu-other-${guestCount}"]`);
-        radioButtons.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.value === 'ostalo') {
-                    otherInput.style.display = 'block';
-                    otherInput.required = true;
-                } else {
-                    otherInput.style.display = 'none';
-                    otherInput.required = false;
-                    otherInput.value = '';
-                }
-            });
-        });
-    }
-
-    function removeGuest(id) {
-        document.getElementById(`guest-${id}`).remove();
-    }
-
-    // Handle guest form submission
-    document.getElementById('guestForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const submitBtn = this.querySelector('.submit-btn');
         const successMsg = document.getElementById('successMessage');
         const errorMsg = document.getElementById('errorMessage');
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Šaljem...';
-        successMsg.style.display = 'none';
-        errorMsg.style.display = 'none';
+        // Page 1 click handler
+        page1.addEventListener('click', function() {
+            page1.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
 
-        const formData = new FormData(this);
-        const guests = [];
+        // Attendance form handler
+        attendanceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const attending = document.querySelector('input[name="attending"]:checked').value;
 
-        for (let i = 1; i <= guestCount; i++) {
-            const guestElement = document.getElementById(`guest-${i}`);
-            if (guestElement) {
-                const name = formData.get(`guest-name-${i}`);
-                const menu = formData.get(`menu-${i}`);
-                const menuOther = formData.get(`menu-other-${i}`);
-                const menuText = menu === 'ostalo' ? `Ostalo: ${menuOther}` : menu;
-                guests.push({ name, menu: menuText });
+            if (attending === 'no') {
+                showFinalPage();
+            } else {
+                page4.style.display = 'flex';
+                page4.scrollIntoView({ behavior: 'smooth' });
+                addGuest();
             }
+        });
+
+        // Add guest button
+        addGuestBtn.addEventListener('click', addGuest);
+
+        // Guest form submission
+        guestForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('.btn-primary');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Šaljem...';
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            const guests = collectGuestData();
+            const data = {
+                attending: 'Da',
+                guests: guests.map(g => `${g.name} (${g.menu})`).join(', '),
+                guestCount: guests.length,
+                timestamp: new Date().toLocaleString('hr-HR')
+            };
+
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                successMsg.style.display = 'block';
+                setTimeout(showFinalPage, 2000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                errorMsg.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Pošalji odgovor';
+            }
+        });
+
+        function addGuest() {
+            guestCount++;
+            const guestItem = createGuestItem(guestCount);
+            guestList.appendChild(guestItem);
         }
 
-        const data = {
-            attending: 'Da',
-            guests: guests.map(g => `${g.name} (${g.menu})`).join(', '),
-            guestCount: guests.length,
-            timestamp: new Date().toLocaleString('hr-HR')
-        };
+        function createGuestItem(id) {
+            const div = document.createElement('div');
+            div.className = 'guest-item';
+            div.id = `guest-${id}`;
+            div.innerHTML = `
+                <div class="form-group">
+                    <label>Ime i prezime gosta ${id}:</label>
+                    <div class="guest-entry">
+                        <input type="text" name="guest-name-${id}" placeholder="Ime i prezime" required>
+                        ${id > 1 ? `<button type="button" class="btn btn-remove" data-guest-id="${id}">−</button>` : ''}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Odaberite meni za gosta ${id}:</label>
+                    <div class="radio-group radio-group-vertical">
+                        <label class="radio-option">
+                            <input type="radio" name="menu-${id}" value="obicni" required>
+                            <span>1. Obični</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="menu-${id}" value="vegetarijanski" required>
+                            <span>2. Vegetarijanski</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="menu-${id}" value="veganski" required>
+                            <span>3. Veganski</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="menu-${id}" value="gluten-free" required>
+                            <span>4. Gluten free</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="menu-${id}" value="ostalo" required>
+                            <span>5. Ostalo (molim navesti alergije):</span>
+                        </label>
+                    </div>
+                    <input type="text" name="menu-other-${id}" placeholder="Navedite alergije ili posebne zahtjeve" class="hidden-input">
+                </div>
+            `;
 
-        try {
-            await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
+            // Event delegation for remove button
+            const removeBtn = div.querySelector('.btn-remove');
+            if (removeBtn) {
+                removeBtn.addEventListener('click', function() {
+                    div.remove();
+                });
+            }
+
+            // Menu "ostalo" handler
+            const radioButtons = div.querySelectorAll(`input[name="menu-${id}"]`);
+            const otherInput = div.querySelector(`input[name="menu-other-${id}"]`);
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'ostalo') {
+                        otherInput.style.display = 'block';
+                        otherInput.required = true;
+                    } else {
+                        otherInput.style.display = 'none';
+                        otherInput.required = false;
+                        otherInput.value = '';
+                    }
+                });
             });
 
-            successMsg.style.display = 'block';
-            setTimeout(() => {
-                showFinalPage();
-            }, 2000);
-
-        } catch (error) {
-            console.error('Error:', error);
-            errorMsg.style.display = 'block';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Pošalji odgovor';
+            return div;
         }
-    });
 
-    function showFinalPage() {
-        const finalPage = document.querySelector('.page-5');
-        finalPage.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+        function collectGuestData() {
+            const guests = [];
+            const formData = new FormData(guestForm);
+
+            for (let i = 1; i <= guestCount; i++) {
+                const guestElement = document.getElementById(`guest-${i}`);
+                if (guestElement) {
+                    const name = formData.get(`guest-name-${i}`);
+                    const menu = formData.get(`menu-${i}`);
+                    const menuOther = formData.get(`menu-other-${i}`);
+                    const menuText = menu === 'ostalo' ? `Ostalo: ${menuOther}` : menu;
+                    guests.push({ name, menu: menuText });
+                }
+            }
+            return guests;
+        }
+
+        function showFinalPage() {
+            page5.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    })();
 </script>
 </body>
 </html>
