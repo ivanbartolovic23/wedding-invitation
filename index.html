@@ -35,7 +35,6 @@
             align-items: center;
             scroll-snap-align: start;
             position: relative;
-            padding: 0;
         }
 
         .page img {
@@ -69,28 +68,6 @@
             padding: 0;
         }
 
-        .scroll-arrow {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            z-index: 10;
-            animation: pulse-arrow 2s infinite;
-        }
-
-        .scroll-arrow svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
-
-        @keyframes pulse-arrow {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
         /* Page 3 - RSVP Attendance */
         .page-3 {
             background-color: #fff;
@@ -104,8 +81,9 @@
             position: relative;
             padding: 0;
             display: none;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
+            padding-bottom: 30px;
         }
 
         .page-4-bg {
@@ -165,9 +143,9 @@
             background: transparent;
             border-radius: 8px;
             font-family: 'Akaya Kanadaka', cursive;
-            max-height: 80vh;
+            max-height: 70vh;
             overflow-y: auto;
-            margin: 20px auto;
+            margin: 0 auto 20px;
             position: relative;
             z-index: 1;
         }
@@ -324,11 +302,8 @@
         }
 
         @media (max-width: 768px) {
-            .scroll-arrow {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
+            .page {
+                padding: 30px 15px;
             }
         }
     </style>
@@ -343,13 +318,6 @@
     <!-- Page 2: Details -->
     <div class="page page-2">
         <img src="detalji_2.png" alt="Detalji">
-        <div class="scroll-arrow" onclick="scrollToPage3()">
-            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="30" cy="30" r="28" fill="#2c2c2c" opacity="0.9"/>
-                <path d="M 20 25 L 30 35 L 40 25" stroke="#f5f0eb" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M 30 15 L 30 35" stroke="#f5f0eb" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-        </div>
     </div>
 
     <!-- Page 3: RSVP Attendance -->
@@ -420,11 +388,6 @@
             page1.classList.add('hidden');
             document.body.style.overflow = 'auto';
         });
-
-        // Scroll to page 3
-        window.scrollToPage3 = function() {
-            document.querySelector('.page-3').scrollIntoView({ behavior: 'smooth' });
-        };
 
         // Attendance form handler
         attendanceForm.addEventListener('submit', function(e) {
@@ -502,8 +465,8 @@
                     <label>Odaberite meni za gosta ${id}:</label>
                     <div class="radio-group radio-group-vertical">
                         <label class="radio-option">
-                            <input type="radio" name="menu-${id}" value="bez_preferencija" required>
-                            <span>1. Bez preferencija</span>
+                            <input type="radio" name="menu-${id}" value="obicni" required>
+                            <span>1. Obični</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="menu-${id}" value="vegetarijanski" required>
@@ -578,3 +541,4 @@
 </script>
 </body>
 </html>
+
