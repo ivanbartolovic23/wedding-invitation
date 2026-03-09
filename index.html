@@ -68,6 +68,15 @@
             padding: 0;
         }
 
+        .page-2 .scroll-arrow {
+            display: none;
+        }
+
+        .page-1.hidden ~ .container .page-2 .scroll-arrow,
+        body:not(:has(.page-1:not(.hidden))) .page-2 .scroll-arrow {
+            display: block;
+        }
+
         /* Page 3 - RSVP Attendance */
         .page-3 {
             background-color: #fff;
@@ -353,7 +362,7 @@
 <div class="container" id="mainContainer">
     <!-- Page 1: Main Invitation -->
     <div class="page page-1" id="page1">
-        <img src="naslovna.png" alt="Iva i Ivan - Vjenčanje 27.6.2026">
+        <img src="naslovna_2.png" alt="Iva i Ivan - Vjenčanje 27.6.2026">
     </div>
 
     <!-- Page 2: Details -->
@@ -513,7 +522,7 @@
                     <div class="radio-group radio-group-vertical">
                         <label class="radio-option">
                             <input type="radio" name="menu-${id}" value="obicni" required>
-                            <span>1. Obični</span>
+                            <span>1. Bez preferencija</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="menu-${id}" value="vegetarijanski" required>
