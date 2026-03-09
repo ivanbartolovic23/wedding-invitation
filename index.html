@@ -56,9 +56,16 @@
             cursor: pointer;
             background-color: #f5f0eb;
             padding: 0;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
         }
 
         .page-1.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .page-1.removed {
             display: none;
         }
 
@@ -438,6 +445,11 @@
         page1.addEventListener('click', function() {
             page1.classList.add('hidden');
             document.body.style.overflow = 'auto';
+            
+            setTimeout(() => {
+                document.querySelector('.page-2').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => page1.classList.add('removed'), 500);
+            }, 800);
         });
 
         // Scroll to page 3
@@ -597,4 +609,6 @@
 </script>
 </body>
 </html>
+
+
 
